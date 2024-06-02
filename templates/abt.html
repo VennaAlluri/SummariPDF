@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Creepster&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            background-color: #C9C7BB;
+            color: #343234;
+        }
+        .name {
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Concert One", sans-serif;
+            font-size: 10ch;
+            font-style: normal;
+            justify-content: center;
+            align-items: center;
+        }
+        .mainnav {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .mainnav div {
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-top: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 20px;
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .mainnav p:hover{
+            color: #aeada7;
+        }
+
+        .info{
+            text-align: left;
+            position: absolute;
+            height: 300px;
+            width: 900px;
+            top: 185px;
+            left: 275px;
+            border-radius: 20px;
+            display: flex;
+            background-color:  #dbdad5;
+            overflow: auto; /* Make the div scrollable */
+            color:  #343234; /* Add text color for visibility */
+            padding: 20px;
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+        }
+    </style>
+    <title>PDF Summarization</title>
+</head>
+<body>
+    <nav class="mainnav">
+        <div>
+            <div onclick="nav_hom()"><p>Home</p></div>
+            <div onclick="nav_abt()"><p>About</p></div>
+            <div onclick="nav_con()"><p>Contact</p></div>
+        </div>
+    </nav>
+    <div>
+        <div class="info"><span id="display"><p>The SummariPDF Tool is a web application designed to simplify the process of summarizing lengthy PDF documents. With the exponential growth of digital content, users often find themselves overwhelmed by the volume of information they need to process. Our tool aims to alleviate this burden by providing an efficient solution for summarizing PDF documents into concise, digestible snippets.</p>
+
+            <p>Using advanced natural language processing (NLP) techniques, our tool extracts key information from PDF files and generates concise summaries that capture the essence of the original content. Whether you're a student preparing for exams, a researcher conducting literature reviews, or a professional seeking to streamline document analysis, our tool empowers you to extract valuable insights quickly and effectively.</p>
+            
+            <p><strong>Key Features:</strong></p>
+            <ul>
+              <li>Upload PDF Documents: Easily upload PDF documents directly to the web application.</li>
+              <li>Summarize Content: Automatically generate summaries of uploaded PDF documents using advanced NLP algorithms.</li>
+            </ul>
+            </span></div>
+    </div>
+
+    <script>
+    function nav_abt(){
+        window.location.href = "/abt"
+    }
+    function nav_con(){
+        window.location.href = "/con"
+    }
+    function nav_hom(){
+        window.location.href = "/hom"
+    }
+
+
+    </script>
+</body>
+</html>

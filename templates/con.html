@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Creepster&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            background-color: #C9C7BB;
+            color: #343234;
+        }
+        .name {
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Concert One", sans-serif;
+            font-size: 10ch;
+            font-style: normal;
+            justify-content: center;
+            align-items: center;
+        }
+        .mainnav {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .mainnav div {
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-top: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 20px;
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .mainnav p:hover{
+            color: #aeada7;
+        }
+
+        .info{
+            position: absolute;
+            top: 325px;
+            left: 425px;
+            display: flex;
+            color:  #343234; 
+            font-family: "Concert One", sans-serif;
+            font-size: 40px;
+            font-weight: 500;
+        }
+    </style>
+    <title>PDF Summarization</title>
+</head>
+<body>
+    <nav class="mainnav">
+        <div>
+            <div onclick="nav_hom()"><p>Home</p></div>
+            <div onclick="nav_abt()"><p>About</p></div>
+            <div onclick="nav_con()"><p>Contact</p></div>
+        </div>
+    </nav>
+    <div>
+        <div class="info">Contact us at : SummariPDF@gmail.com</div>
+    </div>
+
+    <script>
+    function nav_abt(){
+        window.location.href = "/abt"
+    }
+    function nav_con(){
+        window.location.href = "/con"
+    }
+    function nav_hom(){
+        window.location.href = "/hom"
+    }
+    </script>
+</body>
+</html>

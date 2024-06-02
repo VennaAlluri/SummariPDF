@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Creepster&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            background-color: #C9C7BB;
+            color: #343234;
+        }
+        .name {
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Concert One", sans-serif;
+            font-size: 10ch;
+            font-style: normal;
+            justify-content: center;
+            align-items: center;
+        }
+        .mainnav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .mainnav div {
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-top: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 20px;
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .mainnav p:hover{
+            color: #aeada7;
+        }
+        .butto {
+            position: absolute;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            display: none; /* Initially hide the button */
+            font-size: 20px;
+            margin: 4px 2px;
+            border-radius: 35px;
+            height: 20px;
+            width: 150px;
+            top: 400px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #343234;
+            color: #C9CFCC; /* Add text color for visibility */
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            transition: width 0.5s, height 0.5s; /* Adjust transition duration */
+            transition: all 0.15s;
+            cursor: pointer; /* Add cursor pointer */
+        }
+        .butto:hover {
+            height: 30px;
+            width: 175px;
+            background-color:#6a676a;
+        }
+
+        @keyframes fade {
+            0%{
+                opacity: 0;
+            }
+            
+            100%{
+                opacity: 1;
+            }
+        }
+
+        .animate {
+            animation: fade 1.5s forwards;
+        }
+    </style>
+    <title>PDF Summarization</title>
+</head>
+<body>
+    <nav class="mainnav">
+        <div>
+            <div onclick="nav_hom()"><p>Home</p></div>
+            <div onclick="nav_abt()"><p>About</p></div>
+            <div onclick="nav_con()"><p>Contact</p></div>
+        </div>
+    </nav>
+    <div>
+        <div class="name"><span id="display"></span></div>
+        <div class="caption"></div>
+        <div class="butto animate-button" id="animate-button" onclick="navigate()">Summarize</div>
+    </div>
+</body>
+<script>
+    var i = 0;
+    var j = 0;
+    var k = "";
+    const name1 = "SummariPDF";
+    dis(name1);
+
+    function dis(name) {
+        for (j = 0; j < name.length; j++) {
+            prt(j, name);
+        }
+    }
+
+    function prt(j, name) {
+        setTimeout(function() {
+            k = k + String(name.charAt(j));
+            document.getElementById("display").innerHTML = k;
+
+            // If the entire name has been displayed, show the button
+            if (j === name.length - 1) {
+                setTimeout(function() {
+                    document.querySelector('.butto').style.display = 'flex';
+                    addanimate();
+                }, 1000); // Delay of 1 second
+            }
+        }, 150 * j);
+        
+    }
+
+    function addanimate(){
+        var button = document.getElementById("animate-button");
+        button.classList.add("animate");
+    }
+
+    function navigate() {
+        window.location.href = "/sum"; // Corrected URL to navigate to sum.html
+    }
+    function nav_abt(){
+        window.location.href = "/abt"
+    }
+    function nav_con(){
+        window.location.href = "/con"
+    }
+    function nav_hom(){
+        window.location.href = "/hom"
+    }
+
+
+</script>
+</html>

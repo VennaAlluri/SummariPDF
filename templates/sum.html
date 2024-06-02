@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Creepster&family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            background-color: #C9C7BB;
+            color: #343234;
+        }
+        .name {
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Concert One", sans-serif;
+            font-size: 10ch;
+            font-style: normal;
+            justify-content: center;
+            align-items: center;
+        }
+        .mainnav {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .mainnav div {
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-top: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 20px;
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .mainnav p:hover{
+            color: #aeada7;
+        }
+        .butto {
+            position: absolute;
+            top: 615px;
+            left: 700px;
+            display: inline-block;
+        }
+        .butto div{
+            padding: 20px;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 20px;
+            margin: 4px 2px;
+            border-radius: 35px;
+            height: 30px;
+            width: 150px;
+            transform: translateX(-50%);
+            background-color: #343234;
+            color: #C9CFCC; /* Add text color for visibility */
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+            transition: all 0.15s;
+            cursor: pointer; /* Add cursor pointer */
+        }
+        .butto div:hover {
+            height: 30px;
+            width: 175px;
+            background-color:#6a676a;
+        }
+
+        .info{
+            text-align: left;
+            position: absolute;
+            height: 475px;
+            width: 900px;
+            top: 85px;
+            left: 250px;
+            border-radius: 20px;
+            display: flex;
+            background-color:  #dbdad5;
+            overflow: auto; /* Make the div scrollable */
+            color:  #343234; /* Add text color for visibility */
+            padding: 20px;
+            font-family: "Concert One", sans-serif;
+            font-weight: 500;
+        }
+
+        /* Loading spinner styles */
+        .loader {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background-image: url('/static/picture_as_pdf_24dp_FILL0_wght400_GRAD0_opsz24.png'); /* Replace 'path_to_your_logo.png' with the path to your logo */
+            background-size: contain;
+            animation: spin 1s linear infinite;
+            margin: auto; /* Center the spinner */
+            position: absolute;
+            top: 300px;
+            left: 670px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <title>PDF Summarization</title>
+</head>
+<body>
+    <nav class="mainnav">
+        <div>
+            <div onclick="nav_hom()"><p>Home</p></div>
+            <div onclick="nav_abt()"><p>About</p></div>
+            <div onclick="nav_con()"><p>Contact</p></div>
+        </div>
+    </nav>
+    <div>
+        <div class="info"><span id="display"><p>Summarized Text :</p></span></div>
+        <!-- Add file input element -->
+        <input type="file" id="fileInput" style="display: none;" onchange="handleFile()">
+        <div class="butto"> 
+            <!-- Trigger file input by clicking on the button -->
+            <div onclick="document.getElementById('fileInput').click()">Upload</div>
+            <!-- Button to trigger summarization -->
+            <div onclick="summarizePDF()">Summarize</div>
+        </div>
+        <!-- Loading spinner -->
+        <div id="loader" class="loader"></div>
+    </div>
+
+    <script>
+        function handleFile() {
+            const file = document.getElementById('fileInput').files[0];
+            // Handle the uploaded file here
+            console.log('File uploaded:', file);
+            // You can add further processing logic here, such as reading the file contents or uploading it to a server
+        }
+
+        function summarizePDF() {
+    // Check if a file is selected
+    const file = document.getElementById('fileInput').files[0];
+    if (!file) {
+        alert('Please upload a file before summarizing.');
+        return;
+    }
+
+    // Show loading spinner
+    document.getElementById('loader').style.display = 'block';
+    document.getElementById('display').innerHTML = '<p>Summarized Text :</p>';
+
+    // Perform summarization logic here
+    // You can send a request to a server endpoint for processing
+    // Example: Send a POST request to '/summari' endpoint
+    
+    // Example code for POST request
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Create a controller for the fetch request
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    // Set a timeout of 3 minutes (180,000 milliseconds)
+    const timeout = 180000; // 3 minutes in milliseconds
+
+    // Start the timer for the timeout
+    const timeoutId = setTimeout(() => {
+        controller.abort(); // Abort the fetch request
+        console.error('Request timed out.');
+        alert('The request timed out. Please try again.');
+        document.getElementById('loader').style.display = 'none'; // Hide loading spinner
+    }, timeout);
+
+    fetch('/summari', {
+        method: 'POST',
+        body: formData,
+        signal: signal // Pass the signal to the fetch request
+    })
+    .then(response => {
+        clearTimeout(timeoutId); // Clear the timeout when the response is received
+        return response.json();
+    })
+    .then(data => {
+        // Hide loading spinner
+        document.getElementById('loader').style.display = 'none';
+
+        // Display summarized text
+        document.getElementById('display').innerHTML = '<p>Summarized Text :</p>' + data.summary;
+    })
+    .catch(error => {
+        // Hide loading spinner
+        document.getElementById('loader').style.display = 'none';
+
+        // Check if the request was aborted due to timeout
+        if (error.name === 'AbortError') {
+            console.error('Request aborted due to timeout.');
+        } else {
+            console.error('Error:', error);
+        }
+    });
+}
+    function nav_abt(){
+        window.location.href = "/abt"
+    }
+    function nav_con(){
+        window.location.href = "/con"
+    }
+    function nav_hom(){
+        window.location.href = "/hom"
+    }
+
+
+    </script>
+</body>
+</html>
